@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: classic-customer
+  namespace: classic-sample-ns
+  labels:
+    app: classic-sample-application
+    subname: customer
+spec:
+  selector:
+    matchLabels:
+      app: classic-sample-application
+      subname: customer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: classic-sample-application
+        subname: customer
+    spec:
+      containers:
+        - name: container-customer
+          image: "gandhicloudlab/classic-customer:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: my-http
+              containerPort: 9030
